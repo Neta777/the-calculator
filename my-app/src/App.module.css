@@ -1,0 +1,49 @@
+.App {
+  text-align: center;
+}
+
+body {
+  background-color: rgb(14, 148, 148);
+}
+
+.calculator {
+  margin-top: 30px;
+  margin-left: 400px;
+  width: 600px;
+  height: 450px;
+  background-color: aqua;
+  border: black solid 5px;
+  border-radius: 20px;
+}
+
+
+h1 {
+
+  text-decoration: underline;
+  font-size: 40px;
+  text-align: center;
+}
+
+.display {
+  text-decoration: underline;
+  text-align: center;
+  width: 200px;
+  margin-left: 100px;
+  cursor: pointer;
+}
+
+.buttons {
+  margin: 50px;
+  margin-top: 5px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.buttons button {
+
+  padding: 20px;
+
+  border-radius: 5px;
+  cursor: pointer;
+}

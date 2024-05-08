@@ -1,48 +1,62 @@
-import React, { useState } from 'react'
-import './App.css';
+import React, { useState } from "react";
+import styles from "./App.module.css";
 
+export function App() {
+  const [operand1, setOperand1] = useState("");
+  const [operand2, setOperand2] = useState("");
+  const [operator, setOperator] = useState("");
+  const [resultColor, setResultColor] = useState("");
 
+  const NUMS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
-let App = ()=> {
-  const onClick = (num) => {
-    if (num === '=') {
-      const result = eval(theValue)
-      setTheValue(result.toString())
+  const handleNumClick = (NUM) => {
+    if (operator === "") {
+      setOperand1(operand1 + NUM);
     } else {
-    setTheValue(theValue + num)
-  }
+      setOperand2(operand2 + NUM);
+    }
+    setResultColor("");
+  };
+  const handleOperatorClick = (op) => {
+    if (op === "C") {
+      setOperand1("");
+      setOperand2("");
+      setOperator("");
+      setResultColor("");
+    } else if (op === "+" || op === "-") {
+      setOperator(op);
+      setResultColor("");
+    } else if (op === "=") {
+      let result;
+      if (operator === "+") {
+        result = parseInt(operand1) + parseInt(operand2);
+      } else if (operator === "-") {
+        result = parseInt(operand1) - parseInt(operand2);
+      }
+      setOperand1(result.toString());
+      setOperand2("");
+      setOperator("");
+      setResultColor("green");
+    }
+  };
+
+  return (
+    <div className={styles.calculator}>
+      <h1>Calculator</h1>
+      <div className={styles.display}>
+        {operand1} {operator} {operand2}
+      </div>
+      <div className={styles.buttons}>
+        {NUMS.map((NUM) => (
+          <button key={NUM} onClick={() => handleNumClick(NUM)}>
+            {NUM}
+          </button>
+        ))}
+        <button onClick={() => handleOperatorClick("+")}>+</button>
+        <button onClick={() => handleOperatorClick("-")}>-</button>
+        <button onClick={() => handleOperatorClick("=")}>=</button>
+        <button onClick={() => handleOperatorClick("C")}>C</button>
+      </div>
+    </div>
+  );
 }
-  const clearInput = () => {
-    setTheValue('')
-  }
-const [theValue, setTheValue] = useState('')
-return ( <>
-  < div className= 'calculator'>
-  <h1>Calculator</h1>
-  <form action = ''>
-
-  < input type = 'text' value= {theValue} className='inputNumber'onFocus={clearInput}/>
-  < input type = 'button' value= '=' className='equal' onClick={() => onClick('=')} />
-
-  <br/>
-<div className= 'inputContainer'>
-  < input type = 'button' value= '1' className='theButton' onClick={() => onClick('1')}/>
-  < input type = 'button' value= '2' className='theButton' onClick={() => onClick('2')}/>
-  < input type = 'button' value= '3' className='theButton' onClick={() => onClick('3')}/><br/>
-  < input type = 'button' value= '4' className='theButton' onClick={() => onClick('4')}/>
-  < input type = 'button' value= '5' className='theButton' onClick={() => onClick('5')}/>
-  < input type = 'button' value= '6' className='theButton' onClick={() => onClick('6')}/><br/>
-  < input type = 'button' value= '7' className='theButton' onClick={() => onClick('7')}/>
-  < input type = 'button' value= '8' className='theButton' onClick={() => onClick('8')}/>
-  < input type = 'button' value= '9' className='theButton' onClick={() => onClick('9')}/><br/>
-  < input type = 'button' value= '0' className='theButton' onClick={() => onClick('0')}/>
-  < input type = 'button' value= '-' className='theButton'onClick={() => onClick('-')}/>
-  < input type = 'button' value= '+' className='theButton' onClick={() => onClick('+')}/><br/>
-
-</div>
-  </form>
-
-  </div>
-  </>)
-}
-export default App
