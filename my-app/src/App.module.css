@@ -32,6 +32,10 @@ h1 {
   cursor: pointer;
 }
 
+.result {
+  color: rgb(10, 75, 10);
+}
+
 .buttons {
   margin: 50px;
   margin-top: 5px;
